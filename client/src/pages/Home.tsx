@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { AnalysisResult } from "@/components/AnalysisResult";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, FileText, Briefcase, Loader2, ArrowRight, Wand2, History } from "lucide-react";
+import { Sparkles, FileText, Briefcase, Loader2, ArrowRight, Wand2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
@@ -78,10 +78,6 @@ Requirements:
             Compare your resume against any job description using AI.
           </p>
         </div>
-        <Button variant="outline" className="rounded-xl gap-2 text-slate-600 border-slate-200">
-          <History className="w-4 h-4" />
-          History
-        </Button>
       </header>
 
       {/* Input Section */}
