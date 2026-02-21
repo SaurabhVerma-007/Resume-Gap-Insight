@@ -1,0 +1,164 @@
+Build a Resume Gap Analyzer Web App from scratch with a minimal, modern UI and a serverless architecture (no database).
+
+🔹 Core Requirements
+
+The app should:
+
+Accept resume text input.
+
+Accept job description text input.
+
+Analyze skill gaps between the resume and job description.
+
+Use AI (OpenAI API) to:
+
+Identify missing skills
+
+Suggest improvements
+
+Generate a structured learning roadmap
+
+Run serverless — no database, no ORM, no persistent storage.
+
+Keep the UI minimal, clean, and modern.
+
+🔹 Tech Stack (Strict — Do Not Add Extra Frameworks)
+
+Frontend: React + Vite (minimal setup)
+
+Styling: Simple CSS or lightweight utility styling (no heavy UI libraries)
+
+Backend: Serverless API route (Vercel-style or simple Express endpoint)
+
+No database
+
+No authentication
+
+No ORM
+
+No complex state management
+
+If using Express, keep everything in memory only.
+
+🔹 Project Structure
+
+Resume-Gap-Analyzer/
+├── client/
+│ ├── App.jsx
+│ ├── main.jsx
+│ ├── styles.css
+│ └── components/
+│ ├── InputForm.jsx
+│ └── Results.jsx
+├── server/
+│ └── analyze.js
+├── package.json
+├── .env
+└── README.md
+
+🔹 AI Analysis Logic
+
+Create a POST endpoint /api/analyze.
+
+The endpoint should:
+
+Validate input (reject empty fields).
+
+Call OpenAI API with a structured prompt.
+
+Ask the model to return structured JSON with:
+
+{
+"matchScore": number,
+"missingSkills": [],
+"weakSkills": [],
+"improvementSuggestions": [],
+"learningRoadmap": [
+{
+"phase": "Beginner / Intermediate / Advanced",
+"topics": []
+}
+]
+}
+
+The AI prompt must:
+
+Compare resume vs job description.
+
+Identify required skills missing in resume.
+
+Suggest how to improve the resume.
+
+Create a 4–8 week structured learning roadmap.
+
+Return only JSON.
+
+🔹 Frontend Requirements
+
+The UI must:
+
+Have two large text areas:
+
+Resume
+
+Job Description
+
+Have an "Analyze" button
+
+Show loading state while AI processes
+
+Display results in clean card layout:
+
+Match score
+
+Missing skills list
+
+Suggestions
+
+Roadmap sections
+
+UI Design Guidelines:
+
+Minimal white background
+
+Soft shadows
+
+Rounded corners
+
+Clean typography
+
+Responsive layout
+
+No heavy animations
+
+🔹 Serverless Requirement
+
+Do not store any user data.
+
+Do not log resume content.
+
+Do not connect to any database.
+
+All processing should happen per request.
+
+🔹 Security & Validation
+
+Limit input size to 50KB.
+
+Handle OpenAI API errors gracefully.
+
+Hide API key using environment variables.
+
+🔹 README.md
+
+Include:
+
+Project overview
+
+Tech stack
+
+How AI analysis works
+
+Setup instructions
+
+Future improvements
