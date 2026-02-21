@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { AnalysisResult } from "@/components/AnalysisResult";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, FileText, Briefcase, Loader2, ArrowRight, Wand2 } from "lucide-react";
+import { Sparkles, FileText, Briefcase, Loader2, ArrowRight, Wand2, History } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
@@ -67,121 +67,95 @@ Requirements:
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50/50 to-white pb-20">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-12 px-4 text-center overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 opacity-30">
-          <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-200 blur-[100px]" />
-          <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-purple-200 blur-[100px]" />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto space-y-6"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-blue-100 shadow-sm text-blue-600 text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span>AI-Powered Career Assistant</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900 leading-tight">
-            Bridge the Gap to Your <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Dream Job</span>
+    <div className="min-h-screen bg-white pb-20">
+      {/* Header Section */}
+      <header className="max-w-7xl mx-auto px-6 pt-12 pb-8 flex justify-between items-start">
+        <div className="space-y-1">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+            Resume Gap Analyzer
           </h1>
-          
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Paste your resume and the job description below. Our AI will analyze the gap, 
-            score your match, and generate a personalized learning roadmap.
+          <p className="text-slate-500 text-lg">
+            Compare your resume against any job description using AI.
           </p>
-        </motion.div>
-      </section>
+        </div>
+        <Button variant="outline" className="rounded-xl gap-2 text-slate-600 border-slate-200">
+          <History className="w-4 h-4" />
+          History
+        </Button>
+      </header>
 
       {/* Input Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-6">
         <AnimatePresence mode="wait">
           {!analyzeMutation.isSuccess ? (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ delay: 0.2 }}
-              className="space-y-8"
+              exit={{ opacity: 0, y: -10 }}
+              className="space-y-10"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 {/* Resume Input */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 text-lg font-semibold text-slate-800">
-                      <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
-                        <FileText className="w-5 h-5" />
-                      </div>
-                      Your Resume
-                    </label>
-                    <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Text Content</span>
+                <Card className="border border-slate-100 shadow-sm rounded-3xl overflow-hidden bg-white p-8 space-y-6">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-indigo-600">
+                      <FileText className="w-5 h-5" />
+                      <h3 className="font-bold text-xl">Your Resume</h3>
+                    </div>
+                    <p className="text-slate-400 text-sm">Paste your professional experience here.</p>
                   </div>
-                  <Card className="border-2 border-slate-100 shadow-lg focus-within:border-blue-500/50 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all">
-                    <CardContent className="p-0">
-                      <Textarea 
-                        placeholder="Paste your resume content here..." 
-                        className="min-h-[300px] border-0 focus-visible:ring-0 rounded-2xl resize-none text-base p-6 leading-relaxed"
-                        value={resume}
-                        onChange={(e) => setResume(e.target.value)}
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
+                  <div className="relative group">
+                    <Textarea 
+                      placeholder="Paste your resume content here..." 
+                      className="min-h-[400px] bg-slate-50/30 border-slate-100 focus-visible:ring-indigo-500/20 focus-visible:border-indigo-500/30 rounded-2xl resize-none text-slate-600 p-6 transition-all"
+                      value={resume}
+                      onChange={(e) => setResume(e.target.value)}
+                    />
+                  </div>
+                </Card>
 
                 {/* Job Description Input */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 text-lg font-semibold text-slate-800">
-                      <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
-                        <Briefcase className="w-5 h-5" />
-                      </div>
-                      Job Description
-                    </label>
-                    <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Requirements</span>
+                <Card className="border border-slate-100 shadow-sm rounded-3xl overflow-hidden bg-white p-8 space-y-6">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-indigo-600">
+                      <Briefcase className="w-5 h-5" />
+                      <h3 className="font-bold text-xl">Job Description</h3>
+                    </div>
+                    <p className="text-slate-400 text-sm">Paste the requirements for the role.</p>
                   </div>
-                  <Card className="border-2 border-slate-100 shadow-lg focus-within:border-indigo-500/50 focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all">
-                    <CardContent className="p-0">
-                      <Textarea 
-                        placeholder="Paste the job description here..." 
-                        className="min-h-[300px] border-0 focus-visible:ring-0 rounded-2xl resize-none text-base p-6 leading-relaxed"
-                        value={jobDescription}
-                        onChange={(e) => setJobDescription(e.target.value)}
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
+                  <div className="relative group">
+                    <Textarea 
+                      placeholder="Paste the job description here..." 
+                      className="min-h-[400px] bg-slate-50/30 border-slate-100 focus-visible:ring-indigo-500/20 focus-visible:border-indigo-500/30 rounded-2xl resize-none text-slate-600 p-6 transition-all"
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
+                    />
+                  </div>
+                </Card>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <div className="flex flex-col items-center gap-6">
                 <Button 
                   onClick={handleAnalyze} 
                   size="lg" 
                   disabled={analyzeMutation.isPending}
-                  className="w-full sm:w-auto min-w-[200px] text-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-12 py-7 text-lg font-bold rounded-2xl shadow-lg shadow-indigo-200 transition-all active:scale-[0.98]"
                 >
                   {analyzeMutation.isPending ? (
                     <>
-                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      <Loader2 className="w-5 h-5 mr-3 animate-spin" />
                       Analyzing...
                     </>
                   ) : (
-                    <>
-                      <Wand2 className="w-5 h-5 mr-2" />
-                      Analyze Match
-                    </>
+                    "Generate Gap Analysis"
                   )}
                 </Button>
                 
                 <Button 
                   variant="ghost" 
                   onClick={handleDemo}
-                  className="text-muted-foreground hover:text-foreground"
+                  className="text-slate-400 hover:text-slate-600 hover:bg-transparent"
                 >
                   Try with Example Data
                 </Button>
